@@ -83,6 +83,8 @@ module.exports = {
                 id: user._id,
                 token
             }; 
-        }
+        },
+
+
     }
 };
