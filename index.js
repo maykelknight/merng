@@ -1,4 +1,4 @@
-const {ApolloServer} = require('apollo-server');
+const {ApolloServer, PubSub} = require('apollo-server');
 const gql = require('graphql-tag');
 
 const mongoose = require('mongoose');
@@ -8,10 +8,11 @@ const User = require('./models/User');
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers/index');
 
+const pubsub = new PubSub()
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({req}) => ({req})
+    context: ({req}) => ({req, pubsub})
 });
 
 mongoose.connect('mongodb+srv://maykel:WDwFQVKm7UYk5rwL@cluster0-saoco.mongodb.net/merng?retryWrites=true&w=majority', { useNewUrlParser: true})
